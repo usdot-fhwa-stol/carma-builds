@@ -1,7 +1,10 @@
 FROM ubuntu:jammy
 
+ARG STOL_APT_REPOSITORY=http://s3.amazonaws.com/stol-apt-repository
+ENV STOL_APT_REPOSITORY=$STOL_APT_REPOSITORY
+
 # add the CARMA repository to the sources list
-RUN echo "deb [trusted=yes] https://s3.amazonaws.com/${AWS_BUCKET_NAME} develop main" > /etc/apt/sources.list.d/carma.list
+RUN echo "deb [trusted=yes] ${STOL_APT_REPOSITORY} develop main" > /etc/apt/sources.list.d/carma.list
 
 RUN apt-get update && apt-get install -y lsb-release
 
@@ -17,4 +20,5 @@ RUN dpkg --add-architecture armhf
 ENV BUILD_ARCHITECTURE=armhf
 
 COPY cmake /opt/carma/cmake
+COPY scripts /opt/carma/scripts
 ENV CARMA_OPT_DIR=/opt/carma
