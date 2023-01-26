@@ -15,7 +15,7 @@ The image built from this project can be used to build C++ libraries and executa
 * [Build script](scripts/build_script.sh) which automatically runs unit tests and has the following compilation modes:
   * Release (default)
   * Debug
-  * Coverage
+  * Code Coverage
 
 ### TODO
 
@@ -26,9 +26,9 @@ The image built from this project can be used to build C++ libraries and executa
 * GCov
 * Publish docs
 * gitignore
-* stanardized formatting (spaces, tabs, etc.) - .editorconfig
+* stanardized formatting (spaces, tabs, etc.) - [.editorconfig](https://editorconfig.org/)
 * debug packages
-* resuable github workflows
+* [resuable github workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows)
 
 ## Contact
 Please click on the CARMA logo below to visit the Federal Highway Adminstration(FHWA) CARMA website.
