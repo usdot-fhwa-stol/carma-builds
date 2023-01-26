@@ -10,7 +10,7 @@ The image built from this project can be used to build C++ libraries and executa
 * Set of CMake helper files for the following functions:
   * Common source directory layout support (include, src, test)
   * Installation
-  * [CMake Debian packaging](https://cmake.org/cmake/help/latest/cpack_gen/deb.html)
+  * [CPack CMake Debian packaging](https://cmake.org/cmake/help/latest/cpack_gen/deb.html)
   * Google Test support
 * [Build script](scripts/build_script.sh) which automatically runs unit tests and has the following compilation modes:
   * Release (default)
