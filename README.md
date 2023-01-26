@@ -5,23 +5,26 @@ CARMA Builds  is a component of CARMA ecosystem, which enables such a coordinati
 The image built from this project can be used to build C++ libraries and executables for the CARMA ecosystem.  It provides the following features:
 
 * Adding the CARMA apt repository to the list of sources
-* Pre-installed packages for cmake and build-essential
-* Pre-installed packages for Google Test and Mock
+* Pre-installed packages for [cmake](https://cmake.org/) and [build-essential](https://packages.ubuntu.com/jammy/build-essential)
+* Pre-installed packages for [Google Test and Mock](https://google.github.io/googletest/)
 * Set of CMake helper files for the following functions:
+  * Common source directory layout support (include, src, test)
   * Installation
-  * Debian packaging
+  * [CMake Debian packaging](https://cmake.org/cmake/help/latest/cpack_gen/deb.html)
   * Google Test support
+* [Build script](scripts/build_script.sh) which automatically runs unit tests and has the following compilation modes:
+  * Release (default)
+  * Debug
+  * Coverage
 
 ### TODO
 
 * Dependency management - dev vs non-dev, mapping
 * Get exact version versus latest
-* Share other build scripts
 * Shared License - cannot currently put copyright in a Debian package with CPack
 * Sonar
 * GCov
 * Publish docs
-* Run tests
 * gitignore
 * stanardized formatting (spaces, tabs, etc.) - .editorconfig
 * debug packages
