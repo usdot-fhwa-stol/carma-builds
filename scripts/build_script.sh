@@ -1,4 +1,5 @@
 #!/bin/bash
+# This script is provided as a helper for common build functions
 
 set -e
 

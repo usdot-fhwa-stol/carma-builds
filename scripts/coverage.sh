@@ -1,4 +1,5 @@
 #!/bin/sh
+# This builds the code coverage for a project based on files in the src directory
 
 set -ex
 
