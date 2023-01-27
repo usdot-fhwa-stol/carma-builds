@@ -2,8 +2,8 @@
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -Wall -Wno-unused-variable")
 set(CMAKE_CXX_STANDARD 17)
 
-# look for source files in src directory
-FILE(GLOB source_files "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
+# look for C/C++ source files in src directory
+FILE(GLOB source_files "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
 # look for include files in include directory
 FILE(GLOB include_files "${CMAKE_CURRENT_SOURCE_DIR}/include/*.h")
 
