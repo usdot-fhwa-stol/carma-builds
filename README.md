@@ -11,8 +11,9 @@ The image built from this project can be used to build C++ libraries and executa
   * Common source directory layout support (include, src, test)
   * Installation
   * [CPack CMake Debian packaging](https://cmake.org/cmake/help/latest/cpack_gen/deb.html)
-  * Google Test support
-* [Build script](scripts/build_script.sh) which automatically runs unit tests and has the following compilation modes:
+  * Google Test support during build
+  * Code coverage generation using gcovr
+* [Build script](scripts/build_script.sh) which automatically runs unit tests and can be used in VS Code as the build task.  It has the following compilation modes:
   * Release (default)
   * Debug
   * Code Coverage
@@ -23,7 +24,6 @@ The image built from this project can be used to build C++ libraries and executa
 * Get exact version versus latest
 * Shared License - cannot currently put copyright in a Debian package with CPack
 * Sonar
-* GCov
 * Publish docs
 * gitignore
 * stanardized formatting (spaces, tabs, etc.) - [.editorconfig](https://editorconfig.org/)
