@@ -14,7 +14,7 @@ The image built from this project can be used to build C++ libraries and executa
     * Creates dbgsym package when built in debug mode
   * Google Test support and test run during build
   * Code coverage generation using gcovr
-* [Build script](scripts/build_script.sh) which can be used in VS Code as the build task.  It has the following compilation modes:
+* [Build script](scripts/build_script.sh) which does an out of source build can be used in VS Code as the build task.  It has the following compilation modes:
   * Release (default)
   * Debug
   * Code Coverage
