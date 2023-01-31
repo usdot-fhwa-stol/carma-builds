@@ -1,6 +1,12 @@
 # Adapted from https://github.com/retifrav/cmake-cpack-example
 # these are cache variables, so they could be overwritten with -D,
-set(CPACK_PACKAGE_NAME ${PROJECT_NAME}
+if (CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+    # name the package as a debug version
+    set (CPACK_DEBIAN_DEBUGINFO_PACKAGE ON)
+else()
+    set (CPACK_STRIP_FILES)
+endif()
+set(CPACK_PACKAGE_NAME ${PROJECT_NAME}${PACKAGE_NAME_EXTENSION}
     CACHE STRING "The resulting package name"
 )
 # which is useful in case of packing only selected components instead of the whole thing

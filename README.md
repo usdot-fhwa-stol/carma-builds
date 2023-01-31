@@ -11,9 +11,10 @@ The image built from this project can be used to build C++ libraries and executa
   * Common source directory layout support (include, src, test)
   * Installation
   * [CPack CMake Debian packaging](https://cmake.org/cmake/help/latest/cpack_gen/deb.html)
+    * Creates dbgsym package when built in debug mode
   * Google Test support and test run during build
   * Code coverage generation using gcovr
-* [Build script](scripts/build_script.sh) which can be used in VS Code as the build task.  It has the following compilation modes:
+* [Build script](scripts/build_script.sh) which does an out of source build and may be used in VS Code as the default build task.  It has the following compilation modes:
   * Release (default)
   * Debug
   * Code Coverage
@@ -23,12 +24,13 @@ The image built from this project can be used to build C++ libraries and executa
 * Dependency management - dev vs non-dev, mapping
 * Get exact version versus latest
 * Shared License - cannot currently put copyright in a Debian package with CPack
+
+These items are likely done in a [template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository):
 * Sonar
 * Publish docs
 * gitignore
-* stanardized formatting (spaces, tabs, etc.) - [.editorconfig](https://editorconfig.org/)
-* debug packages
 * [resuable github workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows)
+* stanardized formatting (spaces, tabs, etc.) - [.editorconfig](https://editorconfig.org/)
 
 ## Contact
 Please click on the CARMA logo below to visit the Federal Highway Adminstration(FHWA) CARMA website.
