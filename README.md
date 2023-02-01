@@ -15,6 +15,7 @@ The image built from this project can be used to build C++ libraries and executa
     * Creates dbgsym package when built in debug mode
   * Google Test support and test run during build
   * Code coverage generation using gcovr
+* [Dependencies install script](scripts/install_dependencies_script.sh) which can install dependent packages and search a CMake file for those dependencies.
 * [Build script](scripts/build_script.sh) which does an out of source build and may be used in VS Code as the default build task.  It has the following compilation modes:
   * Release (default)
   * Debug
