@@ -12,6 +12,7 @@ The image built from this project can be used to build C++ libraries and executa
   * Common install path setup for /opt/carma
   * Installation
   * [CPack CMake Debian packaging](https://cmake.org/cmake/help/latest/cpack_gen/deb.html)
+    * Include dependency information
     * Creates dbgsym package when built in debug mode
   * Google Test support and test run during build
   * Code coverage generation using gcovr
@@ -31,7 +32,7 @@ To use the image you will need to login to the [GitHub Conatiner Registry](https
 
 ### TODO
 
-* Dependency management - dev vs non-dev, mapping
+* Dependency management - dev vs non-dev, mapping - May be good?
 * Get exact version versus latest
 * Shared License - cannot currently put copyright in a Debian package with CPack
 * Do not use underscores in project names - https://wiki.debian.org/DebianPackageInformation

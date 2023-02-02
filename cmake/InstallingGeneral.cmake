@@ -28,6 +28,15 @@ set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${public_headers
 
 set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "d")
 
+get_target_property(target_type ${PROJECT_NAME} TYPE)
+if (target_type STREQUAL "EXECUTABLE")
+    # include the CARMA lib directory
+    set_target_properties(${PROJECT_NAME}
+    PROPERTIES
+        INSTALL_RPATH "$ENV{CARMA_OPT_DIR}/lib"
+    )
+endif ()
+
 # install the target and create export-set
 install(
     TARGETS ${PROJECT_NAME}

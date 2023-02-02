@@ -46,6 +46,12 @@ set(CPACK_DEB_COMPONENT_INSTALL YES)
 
 # autogenerate dependency information
 set (CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+# set the SO version
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    SOVERSION ${PROJECT_VERSION}
+)
+# generate the shlibs control file
+set (CPACK_DEBIAN_PACKAGE_GENERATE_SHLIBS ON)
 
 # check to see if cross compile is happening
 if (DEFINED ENV{BUILD_ARCHITECTURE})
