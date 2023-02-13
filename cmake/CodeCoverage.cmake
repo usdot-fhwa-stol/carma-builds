@@ -13,7 +13,8 @@ set(COVERAGE_OUTPUT_FILE coverage_sonar.xml)
 add_custom_target(
     generate_coverage ALL
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-    COMMAND ${GCOVR_PATH} --sonarqube build/${COVERAGE_OUTPUT_FILE} -s --filter src 2> gcov_run_cmake.out
+    # use --exclude-throw-branches to get branch coverage more sensible per https://gcovr.com/en/stable/faq.html
+    COMMAND ${GCOVR_PATH} --exclude-throw-branches --sonarqube build/${COVERAGE_OUTPUT_FILE} -s --filter src 2> gcov_run_cmake.out
     DEPENDS run_unit_test
     )
 
