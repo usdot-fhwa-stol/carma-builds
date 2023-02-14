@@ -21,6 +21,7 @@ The image built from this project can be used to build C++ libraries and executa
   * Release (default)
   * Debug
   * Code Coverage
+* Debugging in container using launch configuration
 
 ## Access
 
