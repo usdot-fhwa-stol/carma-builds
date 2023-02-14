@@ -8,7 +8,7 @@ RUN echo "deb [trusted=yes] ${STOL_APT_REPOSITORY} develop main" > /etc/apt/sour
 
 RUN apt-get update
 # add build tools including Google test and mock
-RUN apt-get install -y cmake build-essential file libgtest-dev libgmock-dev
+RUN apt-get install -y cmake build-essential file libgtest-dev libgmock-dev gdb
 
 COPY cmake /opt/carma/cmake
 COPY scripts /opt/carma/scripts
