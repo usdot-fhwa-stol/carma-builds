@@ -21,7 +21,6 @@ The image built from this project can be used to build C++ libraries and executa
   * Release (default)
   * Debug
   * Code Coverage
-* Debugging in container using launch configuration
 
 ## Access
 
@@ -44,6 +43,7 @@ These items are likely done in a [template repository](https://docs.github.com/e
 * gitignore
 * [resuable github workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows)
 * stanardized formatting (spaces, tabs, etc.) - [.editorconfig](https://editorconfig.org/)
+* Debugging in container using launch configuration
 
 ## Contact
 Please click on the CARMA logo below to visit the Federal Highway Adminstration(FHWA) CARMA website.
