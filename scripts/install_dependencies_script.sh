@@ -16,7 +16,7 @@ help()
 }
 
 # Get the options
-while getopts ":c:" option; do
+while getopts "c:" option; do
     case $option in
         c) # generate coverage report
             CMAKE_SEARCH_FILE=${OPTARG}
@@ -24,9 +24,6 @@ while getopts ":c:" option; do
         h) # display Help
             help
             exit;;
-        \?) # Invalid option
-            echo "Error: Invalid option: $OPTARG"
-            exit 1;;
     esac
 done
 shift $((OPTIND-1))
