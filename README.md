@@ -39,6 +39,7 @@ To use the image you will need to login to the [GitHub Conatiner Registry](https
 * Do not use underscores in project names - https://wiki.debian.org/DebianPackageInformation
 
 These items are likely done in a [template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository):
+* CI badges in README
 * Sonar
 * Publish docs
 * gitignore
