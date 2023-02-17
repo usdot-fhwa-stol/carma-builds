@@ -13,6 +13,7 @@ The image built from this project can be used to build C++ libraries and executa
   * Installation
   * [CPack CMake Debian packaging](https://cmake.org/cmake/help/latest/cpack_gen/deb.html)
     * Include dependency information
+    * Require use of shared object versions for shared libraries
     * Creates dbgsym package when built in debug mode
   * Google Test support and test run during build
   * Code coverage generation using gcovr
