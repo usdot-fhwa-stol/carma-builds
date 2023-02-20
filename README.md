@@ -13,6 +13,7 @@ The image built from this project can be used to build C++ libraries and executa
   * Installation
   * [CPack CMake Debian packaging](https://cmake.org/cmake/help/latest/cpack_gen/deb.html)
     * Include dependency information
+    * Standardize package names with dashes instead of underscores (RE: https://wiki.debian.org/DebianPackageInformation#Debian_Package_Information)
     * Require use of shared object versions for shared libraries
     * Creates dbgsym package when built in debug mode
   * Google Test support and test run during build
@@ -34,9 +35,7 @@ To use the image you will need to login to the [GitHub Conatiner Registry](https
 ### TODO
 
 * Dependency management - dev vs non-dev, mapping - May be good?
-* Get exact version versus latest
 * Shared License - cannot currently put copyright in a Debian package with CPack
-* Do not use underscores in project names - https://wiki.debian.org/DebianPackageInformation
 
 These items are likely done in a [template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository):
 * CI badges in README
