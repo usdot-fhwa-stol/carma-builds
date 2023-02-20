@@ -1,4 +1,5 @@
 # Adapted from https://github.com/retifrav/cmake-cpack-example
+
 # these are cache variables, so they could be overwritten with -D,
 if (CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
     # name the package as a debug version
@@ -10,7 +11,24 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebIn
 else()
     set (CPACK_STRIP_FILES)
 endif()
-set(CPACK_PACKAGE_NAME ${PROJECT_NAME}${PACKAGE_NAME_EXTENSION}
+# check the SO version
+get_target_property(target_type ${PROJECT_NAME} TYPE)
+if (target_type STREQUAL "SHARED_LIBRARY")
+    get_target_property(so_version ${PROJECT_NAME} SOVERSION)
+    if (NOT so_version)
+        message( FATAL_ERROR "Target property SOVERSION must be defined for shared library packages." )
+    endif()
+    set (PACKAGE_VERSION ${so_version})
+endif()
+
+if (NOT PACKAGE_VERSION)
+    message( FATAL_ERROR "PACKAGE_VERSION must be defined for packages." )
+endif()
+
+# translate any _ to dash for the package name
+string(REPLACE "_" "-" deb_package_name ${PROJECT_NAME})
+
+set(CPACK_PACKAGE_NAME ${deb_package_name}-${PACKAGE_VERSION}${PACKAGE_NAME_EXTENSION}
     CACHE STRING "The resulting package name"
 )
 # which is useful in case of packing only selected components instead of the whole thing
@@ -52,10 +70,6 @@ set(CPACK_DEB_COMPONENT_INSTALL YES)
 
 # autogenerate dependency information
 set (CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
-# set the SO version
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    SOVERSION ${PROJECT_VERSION}
-)
 # generate the shlibs control file
 set (CPACK_DEBIAN_PACKAGE_GENERATE_SHLIBS ON)
 
