@@ -60,5 +60,6 @@ if [ -z "$PACKAGE_LIST_FINAL" ]; then
     exit 1
 fi
 
-apt-get update
+# ignore errors in apt-get as any issues will fall out in the install
+apt-get update && true
 apt-get install -y $PACKAGE_LIST_FINAL
