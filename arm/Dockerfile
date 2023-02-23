@@ -20,5 +20,9 @@ RUN dpkg --add-architecture armhf
 ENV BUILD_ARCHITECTURE=armhf
 
 COPY cmake /opt/carma/cmake
+# modify CPack Debian module to allow Debian packaging to work for arm
+# if not done then it finds objcopy for host which does not work
+RUN sed -i "s/find_program(OBJCOPY_EXECUTABLE NAMES objcopy)/set(OBJCOPY_EXECUTABLE \${CPACK_OBJCOPY_EXECUTABLE})/" /usr/share/cmake-3.22/Modules/Internal/CPack/CPackDeb.cmake
+
 COPY scripts /opt/carma/scripts
 ENV CARMA_OPT_DIR=/opt/carma

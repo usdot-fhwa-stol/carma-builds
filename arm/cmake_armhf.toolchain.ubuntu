@@ -9,7 +9,7 @@ set(CMAKE_CXX_COMPILER "arm-linux-gnueabihf-g++")
 #set(CMAKE_FIND_ROOT_PATH /usr/arm-linux-gnueabihf)
 set(CMAKE_INCLUDE_PATH  /usr/include/arm-linux-gnueabihf)
 set(CMAKE_LIBRARY_PATH  /usr/lib/arm-linux-gnueabihf)
-set(CMAKE_MODULE_PATH /usr/lib/arm-linux-gnueabihf)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} /usr/lib/arm-linux-gnueabihf)
 set(CMAKE_PROGRAM_PATH  /usr/bin/arm-linux-gnueabihf)
 
 # Adjust the default behavior of the FIND_XXX() commands:
@@ -20,3 +20,6 @@ set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+
+# set Debian package dependency library path
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS_PRIVATE_DIRS /usr/arm-linux-gnueabihf/lib)
