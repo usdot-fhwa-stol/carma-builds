@@ -1,4 +1,5 @@
 #!/bin/sh
+# script used to build the x64 and arm cross compiler images in development environment
 
 set -ex
 
