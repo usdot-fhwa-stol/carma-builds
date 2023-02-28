@@ -1,4 +1,4 @@
-CARMA Builds  is a component of CARMA ecosystem, which enables such a coordination among different transportation users. This component provides Docker images used to build other projects within CARMA.
+CARMA Builds  is a component of the CARMA ecosystem, which enables such a coordination among different transportation users. This component provides Docker images used to build other projects within CARMA.
 
 ## Features
 
@@ -7,6 +7,7 @@ The image built from this project can be used to build C++ libraries and executa
 * Adding the CARMA apt repository to the list of sources
 * Pre-installed packages for [cmake](https://cmake.org/) and [build-essential](https://packages.ubuntu.com/jammy/build-essential)
 * Pre-installed packages for [Google Test and Mock](https://google.github.io/googletest/)
+* Images for x64 and arm cross compile builds with arm using the strategy defined here: https://wiki.debian.org/Multiarch/HOWTO
 * Set of CMake helper files for the following functions:
   * Common source directory layout support (include, src, test)
   * Common install path setup for /opt/carma
