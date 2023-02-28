@@ -23,3 +23,5 @@ set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 
 # set Debian package dependency library path
 set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS_PRIVATE_DIRS /usr/arm-linux-gnueabihf/lib)
+# exlcude the very basic libraries as otherwise the dependencies come out incorrectly
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS_EXCLUDES libgcc-s1-armhf-cross;libc6;libstdc++6)

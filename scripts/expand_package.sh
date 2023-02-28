@@ -4,6 +4,7 @@
 set -ex
 
 OUTPUT_DIR=package_output
+BUILD_DIR=build${BUILD_ARCHITECTURE}
 
-dpkg-deb -R build/_packages/*deb build/${OUTPUT_DIR}
-find build/${OUTPUT_DIR}
+dpkg-deb -R ${BUILD_DIR}/_packages/*deb ${BUILD_DIR}/${OUTPUT_DIR}
+find ${BUILD_DIR}/${OUTPUT_DIR}
