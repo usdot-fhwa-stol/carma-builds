@@ -1,5 +1,11 @@
 CARMA Builds  is a component of the CARMA ecosystem, which enables such a coordination among different transportation users. This component provides Docker images used to build other projects within CARMA.
 
+# CI Status
+
+This badge is for the default branch only.
+
+[![Docker Build](https://github.com/usdot-fhwa-stol/carma-builds/actions/workflows/docker.yml/badge.svg)](https://github.com/usdot-fhwa-stol/carma-builds/actions/workflows/docker.yml)
+
 ## Features
 
 The image built from this project can be used to build C++ libraries and executables for the CARMA ecosystem.  It provides the following features:
