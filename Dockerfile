@@ -1,5 +1,8 @@
 FROM ubuntu:jammy as base
 
+# take in build architecture as an argumennt for later
+ARG BUILD_ARCHITECTURE
+
 # add the CARMA repository to the sources list
 ARG STOL_APT_REPOSITORY=http://s3.amazonaws.com/stol-apt-repository
 ENV STOL_APT_REPOSITORY=$STOL_APT_REPOSITORY
