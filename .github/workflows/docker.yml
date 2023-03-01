@@ -46,7 +46,7 @@ jobs:
         with:
           push: true
           build-args:
-            BUILD_ARCHITECTURE: ${{ matrix.architecture }}
+            - BUILD_ARCHITECTURE: ${{ matrix.architecture }}
           target: ${{ matrix.target }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
