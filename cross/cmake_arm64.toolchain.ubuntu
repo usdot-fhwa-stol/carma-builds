@@ -1,0 +1,27 @@
+set(CMAKE_SYSTEM_NAME               Linux)
+set(CMAKE_SYSTEM_PROCESSOR          aarch64)
+
+# Name of C compiler.
+set(CMAKE_C_COMPILER "aarch64-linux-gnu-gcc")
+set(CMAKE_CXX_COMPILER "aarch64-linux-gnu-g++")
+
+# Where to look for the target environment. (More paths can be added here)
+#set(CMAKE_FIND_ROOT_PATH /usr/aarch64-linux-gnu)
+set(CMAKE_INCLUDE_PATH  /usr/include/aarch64-linux-gnu)
+set(CMAKE_LIBRARY_PATH  /usr/lib/aarch64-linux-gnu)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} /usr/lib/aarch64-linux-gnu)
+set(CMAKE_PROGRAM_PATH  /usr/bin/aarch64-linux-gnu)
+
+# Adjust the default behavior of the FIND_XXX() commands:
+# search programs in the host environment only.
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+
+# Search headers and libraries in the target environment only.
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+
+# set Debian package dependency library path
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS_PRIVATE_DIRS /usr/aarch64-linux-gnu/lib)
+# exlcude the very basic libraries as otherwise the dependencies come out incorrectly
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS_EXCLUDES libgcc-s1-arm64-cross;libc6;libstdc++6)
