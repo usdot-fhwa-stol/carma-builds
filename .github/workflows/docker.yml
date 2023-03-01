@@ -9,11 +9,10 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  architecture_matrix:
+  docker-build:
     strategy:
       matrix:
         architecture: [x64, armhf]
-  docker-build:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
