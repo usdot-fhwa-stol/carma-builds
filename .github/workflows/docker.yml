@@ -12,7 +12,13 @@ jobs:
   docker-build:
     strategy:
       matrix:
-        architecture: [x64, armhf]
+        include:
+          - architecture: x64
+            target: x64-version
+          - architecture: armhf
+            target: cross-compile-version
+          - architecture: arm64
+            target: cross-compile-version
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
@@ -39,6 +45,8 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
+          build-args: |
+            BUILD_ARCHITECTURE=${{ matrix.architecture }}
+          target: ${{ matrix.target }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          file: ${{ matrix.architecture }}/Dockerfile

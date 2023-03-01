@@ -31,7 +31,7 @@ To use the image you will need to login to the [GitHub Conatiner Registry](https
 * Create a [GitHub Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) with read access to packages.
 * On the host you want to use the image on run ```docker login ghcr.io``` to authenticate to the GHCR.
 * Provide your GitHub user name and the token as the password.
-* You should now be able to run ```docker pull ghcr.io/usdot-fhwa-stol/carma-builds```
+* You should now be able to run ```docker pull ghcr.io/usdot-fhwa-stol/carma-builds-x64```
 
 ### TODO
 
