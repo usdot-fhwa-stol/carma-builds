@@ -45,8 +45,8 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          build-args:
-            - BUILD_ARCHITECTURE: ${{ matrix.architecture }}
+          build-args: |
+            BUILD_ARCHITECTURE: ${{ matrix.architecture }}
           target: ${{ matrix.target }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
