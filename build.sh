@@ -3,5 +3,6 @@
 
 set -ex
 
-docker build . -t carma_cmake_builder
-docker build . -f arm/Dockerfile -t carma_cmake_builder_arm
+for arch in x64 armhf; do
+    docker build . -f ${arch}/Dockerfile -t carma_cmake_builder_${arch}
+done

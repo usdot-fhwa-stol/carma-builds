@@ -9,12 +9,12 @@ RUN echo "deb [trusted=yes] ${STOL_APT_REPOSITORY} develop main" > /etc/apt/sour
 RUN apt-get update && apt-get install -y lsb-release
 
 # setup to be able to install :armhf packages
-COPY arm/add_armhf_ports.sh /
+COPY armhf/add_armhf_ports.sh /
 RUN /add_armhf_ports.sh
 RUN apt-get update
 
 RUN apt-get install -y cmake crossbuild-essential-armhf file
-COPY arm/cmake_armhf.toolchain.ubuntu /opt/carma/cmake/
+COPY armhf/cmake_armhf.toolchain.ubuntu /opt/carma/cmake/
 
 RUN dpkg --add-architecture armhf
 ENV BUILD_ARCHITECTURE=armhf
@@ -24,7 +24,7 @@ COPY cmake /opt/carma/cmake
 # if not done then it finds objcopy for host which does not work
 # this allow allows for exludiung some of the core cross packages from dependencies
 RUN cp /usr/share/cmake-3.22/Modules/Internal/CPack/CPackDeb.cmake /usr/share/cmake-3.22/Modules/Internal/CPack/CPackDeb.cmake.orig
-COPY arm/CPackDeb.cmake cmake /usr/share/cmake-3.22/Modules/Internal/CPack/
+COPY armhf/CPackDeb.cmake cmake /usr/share/cmake-3.22/Modules/Internal/CPack/
 
 COPY scripts /opt/carma/scripts
 ENV CARMA_OPT_DIR=/opt/carma
