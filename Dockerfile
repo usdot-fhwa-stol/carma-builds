@@ -5,9 +5,6 @@ COPY cmake /opt/carma/cmake
 COPY scripts /opt/carma/scripts
 ENV CARMA_OPT_DIR=/opt/carma
 
-# add the CARMA repositories to the sources list
-RUN /opt/carma/scripts/add_stol_repos.sh
-
 # have the package manager scan the current repo list
 RUN apt-get update
 
