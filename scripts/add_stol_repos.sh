@@ -48,7 +48,6 @@ USE_DEVELOP=1
 
 # use dashes instead of underscores in our repo code names
 NO_UNDERSCORE_NAME=${GITHUB_REF_NAME//_/-}
-DEVELOP_BRANCHES="carma-develop develop"
 
 # check for feature branches
 if [[ ${GITHUB_REF_NAME} =~ feature/.* ]]; then
@@ -79,14 +78,17 @@ rm -f $PREFERENCE_FILE
 if [ $USE_DEVELOP -eq 1 ]; then
     echo "deb [trusted=yes] ${STOL_APT_REPOSITORY} develop main" >> $LIST_FILE
 fi
-if [[ ! -z "$APT_CODENAME" && "$APT_CODENAME" != "develop" ]]; then
+if [[ -n "$APT_CODENAME" && "$APT_CODENAME" != "develop" ]]; then
     echo "deb [trusted=yes] ${STOL_APT_REPOSITORY} ${APT_CODENAME} main" >> $LIST_FILE
+    # if using develop as a secondary repo then pin this one
+    if [ $USE_DEVELOP -eq 1 ]; then
     # pin this repository
 cat << EOF >> $PREFERENCE_FILE
     Package: *
     Pin: ${APT_CODENAME} o=${STOL_APT_AWS_BUCKET_NAME}
     Pin-Priority: 999
 EOF
+    fi
 
 fi
 
