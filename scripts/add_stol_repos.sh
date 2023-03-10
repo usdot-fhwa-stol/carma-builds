@@ -84,9 +84,9 @@ if [[ -n "$APT_CODENAME" && "$APT_CODENAME" != "develop" ]]; then
     if [ $USE_DEVELOP -eq 1 ]; then
     # pin this repository
 cat << EOF >> $PREFERENCE_FILE
-    Package: *
-    Pin: ${APT_CODENAME} o=${STOL_APT_AWS_BUCKET_NAME}
-    Pin-Priority: 999
+Package: *
+Pin: release o=${STOL_APT_AWS_BUCKET_NAME},n=${APT_CODENAME}
+Pin-Priority: 999
 EOF
     fi
 
