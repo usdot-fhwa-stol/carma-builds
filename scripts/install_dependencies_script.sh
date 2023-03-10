@@ -60,6 +60,8 @@ if [ -z "$PACKAGE_LIST_FINAL" ]; then
     exit 1
 fi
 
+# run the script to add the CARMA repos which can can take git branch names into account
+/opt/carma/scripts/add_stol_repos.sh
 # ignore errors in apt-get as any issues will fall out in the install
 apt-get update && true
 apt-get install -y $PACKAGE_LIST_FINAL
