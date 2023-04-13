@@ -12,13 +12,24 @@ jobs:
   docker-build:
     strategy:
       matrix:
-        ubuntu-codename: ["focal", "jammy"]
         include:
           - architecture: x64
+            ubuntu-codename: focal
             target: x64-version
           - architecture: armhf
+            ubuntu-codename: focal
             target: cross-compile-version
           - architecture: arm64
+            ubuntu-codename: focal
+            target: cross-compile-version
+          - architecture: x64
+            ubuntu-codename: jammy
+            target: x64-version
+          - architecture: armhf
+            ubuntu-codename: jammy
+            target: cross-compile-version
+          - architecture: arm64
+            ubuntu-codename: jammy
             target: cross-compile-version
     runs-on: ubuntu-latest
     steps:
