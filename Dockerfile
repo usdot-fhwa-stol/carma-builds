@@ -42,5 +42,4 @@ RUN dpkg --add-architecture ${BUILD_ARCHITECTURE}
 # modify CPack Debian module to allow Debian packaging to work for arm
 # if not done then it finds objcopy for host which does not work
 # this allow allows for exludiung some of the core cross packages from dependencies
-RUN cp /usr/share/cmake-*/Modules/Internal/CPack/CPackDeb.cmake /usr/share/cmake-*/Modules/Internal/CPack/CPackDeb.cmake.orig
 COPY cross/CPackDeb.cmake cmake /usr/share/cmake-*/Modules/Internal/CPack/
