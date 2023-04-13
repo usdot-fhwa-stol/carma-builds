@@ -12,6 +12,7 @@ jobs:
   docker-build:
     strategy:
       matrix:
+        ubuntu-codename: ["focal", "jammy"]
         include:
           - architecture: x64
             target: x64-version
@@ -40,13 +41,14 @@ jobs:
             type=ref,event=tag
             type=ref,event=pr
             # set latest tag for default branch
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=${{ matrix.ubuntu-codename }},enable={{is_default_branch}}
       - name: Build
         uses: docker/build-push-action@v3
         with:
           push: true
           build-args: |
             BUILD_ARCHITECTURE=${{ matrix.architecture }}
+            UBUNTU_CODENAME=${{ matrix.ubuntu-codename }}
           target: ${{ matrix.target }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

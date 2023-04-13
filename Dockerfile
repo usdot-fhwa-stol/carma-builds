@@ -1,4 +1,6 @@
-FROM ubuntu:jammy as base
+ARG UBUNTU_CODENAME
+
+FROM ubuntu:$UBUNTU_CODENAME as base
 
 # copy the standard CMake scripts into the image
 COPY cmake /opt/carma/cmake
