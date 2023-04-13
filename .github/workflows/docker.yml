@@ -12,7 +12,6 @@ jobs:
   docker-build:
     strategy:
       matrix:
-        ubuntu-codename: ["focal", "jammy"]
         include:
           - architecture: x64
             target: x64-version
@@ -20,6 +19,8 @@ jobs:
             target: cross-compile-version
           - architecture: arm64
             target: cross-compile-version
+          - ubuntu-codename: focal
+          - ubuntu-codename: jammy
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
