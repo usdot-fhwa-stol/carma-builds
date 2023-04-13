@@ -7,6 +7,8 @@ COPY cmake /opt/carma/cmake
 COPY scripts /opt/carma/scripts
 ENV CARMA_OPT_DIR=/opt/carma
 
+ENV DEBIAN_FRONTEND="noninteractive"
+
 # have the package manager scan the current repo list
 RUN apt-get update
 
