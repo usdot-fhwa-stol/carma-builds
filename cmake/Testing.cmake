@@ -11,7 +11,7 @@ IF(NOT DEFINED ENV{BUILD_ARCHITECTURE} AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/te
     target_link_libraries(${UNIT_TEST} PUBLIC 
         ${PROJECT_NAME}
         ${TEST_LINK_LIBRARIES}
-        gtest)
+        GTest::gtest_main)
     add_test(NAME ${UNIT_TEST} COMMAND ${UNIT_TEST})
     add_custom_target(
         run_unit_test ALL
