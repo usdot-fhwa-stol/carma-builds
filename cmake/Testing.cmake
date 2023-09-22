@@ -13,6 +13,7 @@ IF(NOT DEFINED ENV{BUILD_ARCHITECTURE} AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/te
         ${TEST_LINK_LIBRARIES}
         GTest::gtest_main)
     add_test(NAME ${UNIT_TEST} COMMAND ${UNIT_TEST})
+    include(GoogleTest)
     gtest_discover_tests(${UNIT_TEST})
     add_custom_target(
         run_unit_test ALL
