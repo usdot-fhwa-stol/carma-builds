@@ -15,12 +15,10 @@ endif()
 get_target_property(target_type ${PROJECT_NAME} TYPE)
 if (target_type STREQUAL "SHARED_LIBRARY")
     get_target_property(so_version ${PROJECT_NAME} SOVERSION)
-    # so_version evaluates to false when set to zero despite having a value 
-    # see (https://cmake.org/cmake/help/v3.0/command/if.html). It evaluates to
-    # so_version-NOTFOUND when no value is present. It is always defined whether
-    # the property exists or not (see https://cmake.org/cmake/help/latest/command/get_target_property.html)
-    if((NOT so_version EQUAL 0 ) AND  (NOT so_version))
-      message( FATAL_ERROR "Target property SOVERSION must be defined for shared library packages." )
+    # Check if so_version is empty or not found to allow for version 0
+    # which is normally treated the same as so_version-NOTFOUND in a condition.
+    if ("${so_version}" STREQUAL "" OR "${so_version}" STREQUAL "so_version-NOTFOUND")
+        message( FATAL_ERROR "Target property SOVERSION must be defined for shared library packages." )
     endif() 
     set (PACKAGE_VERSION ${so_version})
 endif()
