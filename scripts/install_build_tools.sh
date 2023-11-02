@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
+# shellcheck source=/dev/null
 . /etc/lsb-release
 echo "Distribution code name : ${DISTRIB_CODENAME}"
 apt-get update
@@ -21,4 +22,4 @@ else
         gdb \
         git"
 fi
-apt-get install -y $DEPENDENCIES
+apt-get install -y "$DEPENDENCIES"
