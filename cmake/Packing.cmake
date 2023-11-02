@@ -15,13 +15,15 @@ endif()
 get_target_property(target_type ${PROJECT_NAME} TYPE)
 if (target_type STREQUAL "SHARED_LIBRARY")
     get_target_property(so_version ${PROJECT_NAME} SOVERSION)
-    if (NOT so_version)
+    # Check if so_version is empty or not found to allow for version 0
+    # which is normally treated the same as so_version-NOTFOUND in a condition.
+    if ("${so_version}" STREQUAL "" OR "${so_version}" STREQUAL "so_version-NOTFOUND")
         message( FATAL_ERROR "Target property SOVERSION must be defined for shared library packages." )
-    endif()
+    endif() 
     set (PACKAGE_VERSION ${so_version})
 endif()
 
-if (NOT PACKAGE_VERSION)
+if (NOT DEFINED PACKAGE_VERSION)
     message( FATAL_ERROR "PACKAGE_VERSION must be defined for packages." )
 endif()
 

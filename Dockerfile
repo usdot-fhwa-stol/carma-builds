@@ -18,6 +18,7 @@ FROM base AS x64-version
 COPY scripts/install_build_tools.sh /install_build_tools.sh
 RUN ./install_build_tools.sh
 
+
 FROM base AS cross-compile-version
 
 # set an envionrment variable anything can use to tell this is a cross compile environment

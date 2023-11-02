@@ -18,6 +18,10 @@ The image built from this project can be used to build C++ libraries and executa
   * Common source directory layout support (include, src, test)
   * Common install path setup for /opt/carma
   * Installation
+  * [CPM.cmake](https://github.com/cpm-cmake/CPM.cmake) a cross-platform CMake script that adds dependency management capabilities to CMake
+    * Allows you to pull in and build CMake dependencies that have git repos.
+    > [!IMPORTANT]\
+    > **Depends on `git` which is now added to `carma-builds-x64` base image**
   * [CPack CMake Debian packaging](https://cmake.org/cmake/help/latest/cpack_gen/deb.html)
     * Include dependency information
     * Standardize package names with dashes instead of underscores (RE: https://wiki.debian.org/DebianPackageInformation#Debian_Package_Information)

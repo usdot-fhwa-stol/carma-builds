@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 # look for C/C++ source files in src directory
 FILE(GLOB source_files "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
 # look for include files in include directory
-FILE(GLOB include_files "${CMAKE_CURRENT_SOURCE_DIR}/include/*.h")
+FILE(GLOB include_files "${CMAKE_CURRENT_SOURCE_DIR}/include/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp")
 
 # set up sources based on target name
 target_sources (${PROJECT_NAME}
