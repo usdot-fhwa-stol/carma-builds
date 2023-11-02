@@ -8,13 +8,12 @@ if [ "$DISTRIB_CODENAME" = "bionic" ];then
     echo "Installing bionic build tools ..."
     DEPENDENCIES="build-essential \
         cmake \
-        build-essential \
         googletest \
         google-mock \
         gdb \
         git"
 else
-    echo "Installing other linux distribution build tools ..."
+    echo "Installing other linux distribution (focal or jammy) build tools ..."
     DEPENDENCIES="build-essential \
         cmake \
         libgtest-dev \
@@ -22,4 +21,4 @@ else
         gdb \
         git"
 fi
-apt-get install -y "$DEPENDENCIES"
+apt-get install -y ${DEPENDENCIES}
