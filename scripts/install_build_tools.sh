@@ -10,13 +10,15 @@ if [ "$DISTRIB_CODENAME" = "bionic" ];then
         build-essential \
         googletest \
         google-mock \
-        gdb"
+        gdb \
+        git"
 else
     echo "Installing other linux distribution build tools ..."
     DEPENDENCIES="build-essential \
         cmake \
         libgtest-dev \
         libgmock-dev \
-        gdb"
+        gdb \
+        git"
 fi
 apt-get install -y $DEPENDENCIES
