@@ -15,7 +15,9 @@ RUN apt-get update
 FROM base AS x64-version
 
 # add build tools including Google test and mock
-RUN apt-get install -y cmake build-essential file libgtest-dev libgmock-dev gdb git
+COPY scripts/install_build_tools.sh /install_build_tools.sh
+RUN ./install_build_tools.sh
+
 
 FROM base AS cross-compile-version
 
