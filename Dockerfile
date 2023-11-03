@@ -15,8 +15,8 @@ RUN apt-get update
 FROM base AS x64-version
 
 # add build tools including Google test and mock
-COPY scripts/install_build_tools.bash /install_build_tools.bash
-RUN ./install_build_tools.bash
+COPY scripts/install_build_tools.sh /install_build_tools.sh
+RUN ./install_build_tools.sh
 
 
 FROM base AS cross-compile-version
