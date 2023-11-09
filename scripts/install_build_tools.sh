@@ -1,27 +1,36 @@
 #!/bin/bash
 set -e
-# shellcheck source=/dev/null
-. /etc/lsb-release
-echo "Distribution code name : ${DISTRIB_CODENAME}"
 apt-get update
-if [ "$DISTRIB_CODENAME" = "bionic" ];then 
-    echo "Installing bionic build tools ..."
-    DEPENDENCIES=(
-        build-essential 
-        cmake 
-        googletest 
-        google-mock
+apt-get -y install 
+DEPENDENCIES=(
+        wget
+        ca-certificates
+        build-essential
         gdb
         git)
-else
-    echo "Installing other linux distribution (focal or jammy) build tools ..."
-    DEPENDENCIES=(
-        build-essential
-        cmake
-        build-essential
-        libgtest-dev
-        libgmock-dev
-        gdb
-        git)
-fi
 DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends --yes --quiet "${DEPENDENCIES[@]}"
+cd /tmp
+# Installing CMake 
+CMAKE_VERSION="3.27.7"
+echo "Installing CMake ${CMAKE_VERSION}"
+wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.sh
+wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.tar.gz
+chmod u+x cmake-${CMAKE_VERSION}-linux-x86_64.sh
+./cmake-${CMAKE_VERSION}-linux-x86_64.sh --skip-license --include-subdir --prefix=/opt
+rm cmake-${CMAKE_VERSION}-linux-x86_64.sh
+rm cmake-${CMAKE_VERSION}-linux-x86_64.tar.gz
+echo "export PATH=/opt/cmake-${CMAKE_VERSION}-linux-x86_64/bin:$PATH" >> /etc/bash.bashrc
+# shellcheck source=/dev/null
+export PATH=/opt/cmake-${CMAKE_VERSION}-linux-x86_64/bin:$PATH
+echo "CMake installation complete"
+# Installing Google Test
+GTEST_VERSION="1.14.0"
+echo "Installing Google Test ${GTEST_VERSION}" 
+git clone https://github.com/google/googletest.git -b "v${GTEST_VERSION}"
+cd googletest/
+cmake -Bbuild
+cmake --build build
+cmake --install build
+echo "Google Test installation complete"
+cd ..
+rm -r googletest/
