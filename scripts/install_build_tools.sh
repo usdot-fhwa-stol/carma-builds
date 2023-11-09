@@ -1,8 +1,5 @@
 #!/bin/bash
 set -e
-# shellcheck source=/dev/null
-. /etc/lsb-release
-echo "Distribution code name : ${DISTRIB_CODENAME}"
 apt-get update
 apt-get -y install 
 DEPENDENCIES=(
@@ -12,6 +9,7 @@ DEPENDENCIES=(
         gdb
         git)
 DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends --yes --quiet "${DEPENDENCIES[@]}"
+cd /tmp
 # Installing CMake 
 CMAKE_VERSION="3.27.7"
 echo "Installing CMake ${CMAKE_VERSION}"
@@ -30,9 +28,9 @@ GTEST_VERSION="1.14.0"
 echo "Installing Google Test ${GTEST_VERSION}" 
 git clone https://github.com/google/googletest.git -b "v${GTEST_VERSION}"
 cd googletest/
-cmake -Bbuild 
-cd build/
-make
-make install
+cmake -Bbuild
+cmake --build build
+cmake --install build
 echo "Google Test installation complete"
-cd -
+cd ..
+rm -r googletest/
