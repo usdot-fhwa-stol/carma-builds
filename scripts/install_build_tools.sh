@@ -17,7 +17,7 @@ echo "Installing CMake ${CMAKE_VERSION}"
 wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.sh
 wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.tar.gz
 chmod u+x cmake-${CMAKE_VERSION}-linux-x86_64.sh
-./cmake-${CMAKE_VERSION}-linux-x86_64.sh --skip-license --exclude-subdir --prefix=/usr/local
+./cmake-${CMAKE_VERSION}-linux-x86_64.sh --skip-license --exclude-subdir --prefix=/usr
 rm cmake-${CMAKE_VERSION}-linux-x86_64.sh
 rm cmake-${CMAKE_VERSION}-linux-x86_64.tar.gz
 echo "CMake installation complete"
