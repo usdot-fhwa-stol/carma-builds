@@ -16,12 +16,9 @@ echo "Installing CMake ${CMAKE_VERSION}"
 wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.sh
 wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.tar.gz
 chmod u+x cmake-${CMAKE_VERSION}-linux-x86_64.sh
-./cmake-${CMAKE_VERSION}-linux-x86_64.sh --skip-license --include-subdir --prefix=/opt
+./cmake-${CMAKE_VERSION}-linux-x86_64.sh --skip-license --exclude-subdir --prefix=/usr/local
 rm cmake-${CMAKE_VERSION}-linux-x86_64.sh
 rm cmake-${CMAKE_VERSION}-linux-x86_64.tar.gz
-echo "export PATH=/opt/cmake-${CMAKE_VERSION}-linux-x86_64/bin:$PATH" >> /etc/bash.bashrc
-# shellcheck source=/dev/null
-export PATH=/opt/cmake-${CMAKE_VERSION}-linux-x86_64/bin:$PATH
 echo "CMake installation complete"
 # Installing Google Test
 GTEST_VERSION="1.14.0"
