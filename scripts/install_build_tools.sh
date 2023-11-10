@@ -7,7 +7,8 @@ DEPENDENCIES=(
         ca-certificates
         build-essential
         gdb
-        git)
+        git
+        file)
 DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends --yes --quiet "${DEPENDENCIES[@]}"
 cd /tmp
 # Installing CMake 
