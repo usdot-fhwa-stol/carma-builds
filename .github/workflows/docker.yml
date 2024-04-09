@@ -49,6 +49,8 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${{ matrix.architecture }}
+          flavor: |
+            latest=false
           tags: |
             type=schedule
             type=ref,event=branch
