@@ -51,9 +51,9 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${{ matrix.architecture }}
           tags: |
             type=schedule
-            type=ref,event=branch,value={{branch}}-${{ matrix.ubuntu-codename }}
-            type=ref,event=tag,value={{tag}}-${{ matrix.ubuntu-codename }}
-            type=ref,event=pr,value={{base_ref}}-${{ matrix.ubuntu-codename }}
+            type=ref,event=branch
+            type=match,pattern=carma-system-*,value={{tag}}-${{ matrix.ubuntu-codename }}
+            type=ref,event=pr
             # set latest tag for default branch
             type=raw,value=dev-${{ matrix.ubuntu-codename }},enable={{is_default_branch}}
             type=raw,value=${{ matrix.ubuntu-codename }},enable=${{ github.ref == format('refs/heads/{0}', 'master') }}
