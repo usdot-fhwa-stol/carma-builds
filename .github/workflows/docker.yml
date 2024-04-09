@@ -52,12 +52,12 @@ jobs:
           tags: |
             type=schedule
             type=ref,event=branch
-            type=match,pattern=carma-system-*,value={{tag}}-${{ matrix.ubuntu-codename }}
+            type=ref,event=tag
             type=ref,event=pr
             # set latest tag for default branch
-            type=raw,value=dev-${{ matrix.ubuntu-codename }},enable={{is_default_branch}}
-            type=raw,value=${{ matrix.ubuntu-codename }},enable=${{ github.ref == format('refs/heads/{0}', 'master') }}
-      - name: Build
+            type=raw,value=${{ matrix.ubuntu-codename }},enable={{is_default_branch}}
+      - name: Build (default branch)
+        if: github.ref_name == github.event.repository.default_branch
         uses: docker/build-push-action@v3
         with:
           push: true
@@ -66,4 +66,15 @@ jobs:
             UBUNTU_CODENAME=${{ matrix.ubuntu-codename }}
           target: ${{ matrix.target }}
           tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+      - name: Build
+        if: github.ref_name != github.event.repository.default_branch
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          build-args: |
+            BUILD_ARCHITECTURE=${{ matrix.architecture }}
+            UBUNTU_CODENAME=${{ matrix.ubuntu-codename }}
+          target: ${{ matrix.target }}
+          tags: ${{ steps.meta.outputs.tags }}-${{ matrix.ubuntu-codename }}
           labels: ${{ steps.meta.outputs.labels }}
