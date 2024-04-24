@@ -49,6 +49,8 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${{ matrix.architecture }}
+          flavor: |
+            latest=false
           tags: |
             type=schedule
             type=ref,event=branch
@@ -56,7 +58,8 @@ jobs:
             type=ref,event=pr
             # set latest tag for default branch
             type=raw,value=${{ matrix.ubuntu-codename }},enable={{is_default_branch}}
-      - name: Build
+      - name: Build (default branch)
+        if: github.ref_name == github.event.repository.default_branch
         uses: docker/build-push-action@v3
         with:
           push: true
@@ -65,4 +68,15 @@ jobs:
             UBUNTU_CODENAME=${{ matrix.ubuntu-codename }}
           target: ${{ matrix.target }}
           tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+      - name: Build
+        if: github.ref_name != github.event.repository.default_branch
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          build-args: |
+            BUILD_ARCHITECTURE=${{ matrix.architecture }}
+            UBUNTU_CODENAME=${{ matrix.ubuntu-codename }}
+          target: ${{ matrix.target }}
+          tags: ${{ steps.meta.outputs.tags }}-${{ matrix.ubuntu-codename }}
           labels: ${{ steps.meta.outputs.labels }}
