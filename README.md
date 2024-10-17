@@ -58,6 +58,6 @@ These items are likely done in a [template repository](https://docs.github.com/e
 * Debugging in container using launch configuration
 
 ## Contact
-Please click on the CARMA logo below to visit the Federal Highway Adminstration(FHWA) CARMA website.
+Please click on the CARMA logo below to visit the Federal Highway Adminstration(FHWA) CARMA website. For technical support from the CARMA team, please contact the CARMA help desk at CAVSupportServices@dot.gov.
 
 [![CARMA Image](https://raw.githubusercontent.com/usdot-fhwa-stol/CARMAPlatform/develop/docs/image/CARMA_icon.png)](https://highways.dot.gov/research/research-programs/operations/CARMA)
