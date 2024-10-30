@@ -20,6 +20,8 @@ RUN ./opt/carma/scripts/install_build_tools.sh
 
 FROM base AS cross-compile-version
 
+RUN ./opt/carma/scripts/install_build_tools.sh
+
 # set an envionrment variable anything can use to tell this is a cross compile environment
 ARG BUILD_ARCHITECTURE
 ENV BUILD_ARCHITECTURE=$BUILD_ARCHITECTURE
@@ -32,7 +34,7 @@ COPY cross/add_cross_architecture_ports.sh /
 RUN /add_cross_architecture_ports.sh
 
 # install the cross compiler
-RUN apt-get update && apt-get install -y cmake crossbuild-essential-${BUILD_ARCHITECTURE} file
+RUN apt-get update && apt-get install -y crossbuild-essential-${BUILD_ARCHITECTURE} file
 
 # copy in our CMake toolchain file which indicates which compile tools to use
 COPY cross/cmake_${BUILD_ARCHITECTURE}.toolchain.ubuntu /opt/carma/cmake/
