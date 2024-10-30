@@ -12,15 +12,14 @@ ENV DEBIAN_FRONTEND="noninteractive"
 # have the package manager scan the current repo list
 RUN apt-get update
 
-FROM base AS x64-version
-
 # add build tools including Google test and mock
 RUN ./opt/carma/scripts/install_build_tools.sh
 
+FROM base AS x64-version
+# Native build/dev environment
 
 FROM base AS cross-compile-version
-
-RUN ./opt/carma/scripts/install_build_tools.sh
+# Cross Compile environment
 
 # set an envionrment variable anything can use to tell this is a cross compile environment
 ARG BUILD_ARCHITECTURE
