@@ -12,13 +12,14 @@ ENV DEBIAN_FRONTEND="noninteractive"
 # have the package manager scan the current repo list
 RUN apt-get update
 
-FROM base AS x64-version
-
 # add build tools including Google test and mock
 RUN ./opt/carma/scripts/install_build_tools.sh
 
+FROM base AS x64-version
+# Native build/dev environment
 
 FROM base AS cross-compile-version
+# Cross Compile environment
 
 # set an envionrment variable anything can use to tell this is a cross compile environment
 ARG BUILD_ARCHITECTURE
@@ -32,7 +33,7 @@ COPY cross/add_cross_architecture_ports.sh /
 RUN /add_cross_architecture_ports.sh
 
 # install the cross compiler
-RUN apt-get update && apt-get install -y cmake crossbuild-essential-${BUILD_ARCHITECTURE} file
+RUN apt-get update && apt-get install -y crossbuild-essential-${BUILD_ARCHITECTURE} file
 
 # copy in our CMake toolchain file which indicates which compile tools to use
 COPY cross/cmake_${BUILD_ARCHITECTURE}.toolchain.ubuntu /opt/carma/cmake/
