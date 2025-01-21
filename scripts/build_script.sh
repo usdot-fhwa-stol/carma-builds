@@ -62,9 +62,15 @@ if [ $GENERATE_COVERAGE -eq 1 ]; then
     COVERAGE_FLAGS=-DGENERATE_COVERAGE=True
 fi
 
-cmake -B${BUILD_DIR} ${TOOLCHAIN_ARG} -DCMAKE_CXX_FLAGS="${CXXFLAGS}" -DCMAKE_BUILD_TYPE="${BUILD_TYPE}" ${PACKAGE_VERSION_SUFFIX}  ${COVERAGE_FLAGS} "${cmake_options[@]}"
-cd ${BUILD_DIR}
-cmake --build .
 if [ $GENERATE_DEBIAN_PACKAGE -eq 1 ]; then
+    cmake -B"${BUILD_DIR}" "${TOOLCHAIN_ARG}" -DCMAKE_CXX_FLAGS="${CXXFLAGS}" -DCMAKE_BUILD_TYPE="${BUILD_TYPE}" -DCREATE_DEB_PACKAGE=ON "${PACKAGE_VERSION_SUFFIX}"  "${COVERAGE_FLAGS}" "${cmake_options[@]}"
+    cd "${BUILD_DIR}"
+    cmake --build .
+    cpack -G DEB
+else
+    cmake -B"${BUILD_DIR}" "${TOOLCHAIN_ARG}" -DCMAKE_CXX_FLAGS="${CXXFLAGS}" -DCMAKE_BUILD_TYPE="${BUILD_TYPE}" "${PACKAGE_VERSION_SUFFIX}"  "${COVERAGE_FLAGS}" "${cmake_options[@]}"
+    cd "${BUILD_DIR}"
+    cmake --build .
     cpack -G DEB
 fi
+
