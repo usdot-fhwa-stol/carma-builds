@@ -15,6 +15,7 @@ help()
     echo "h     Print this Help."
     echo "p     Generate a Debian package using CPack."
     echo "s     Suffix to append to version for Debian packaging."
+    echo "D     Pass CMake options to build command (e.i -DBUILD_TESTS=ON)"
     echo
 }
 
@@ -23,7 +24,7 @@ GENERATE_COVERAGE=0
 GENERATE_DEBIAN_PACKAGE=0
 
 # Get the options
-while getopts "cdhps:" option; do
+while getopts "cdhpsD:" option; do
     case $option in
         c) # generate coverage report
             GENERATE_COVERAGE=1
@@ -36,6 +37,9 @@ while getopts "cdhps:" option; do
             ;;
         s) # Debian package version suffix
             PACKAGE_VERSION_SUFFIX="-DPACKAGE_VERSION_SUFFIX=${OPTARG}"
+            ;;
+        D) # Pass CMake options
+            CMAKE_OPTIONS+=("-D$OPTARG")
             ;;
         h) # display Help
             help
@@ -58,9 +62,15 @@ if [ $GENERATE_COVERAGE -eq 1 ]; then
     COVERAGE_FLAGS=-DGENERATE_COVERAGE=True
 fi
 
-cmake -B${BUILD_DIR} ${TOOLCHAIN_ARG} -DCMAKE_CXX_FLAGS="${CXXFLAGS}" -DCMAKE_BUILD_TYPE="${BUILD_TYPE}" ${PACKAGE_VERSION_SUFFIX}  ${COVERAGE_FLAGS}
-cd ${BUILD_DIR}
-cmake --build .
 if [ $GENERATE_DEBIAN_PACKAGE -eq 1 ]; then
+    cmake -B"${BUILD_DIR}" "${TOOLCHAIN_ARG}" -DCMAKE_CXX_FLAGS="${CXXFLAGS}" -DCMAKE_BUILD_TYPE="${BUILD_TYPE}" -DCREATE_DEB_PACKAGE=ON "${PACKAGE_VERSION_SUFFIX}"  "${COVERAGE_FLAGS}" "${CMAKE_OPTIONS[@]}"
+    cd "${BUILD_DIR}"
+    cmake --build .
+    cpack -G DEB
+else
+    cmake -B"${BUILD_DIR}" "${TOOLCHAIN_ARG}" -DCMAKE_CXX_FLAGS="${CXXFLAGS}" -DCMAKE_BUILD_TYPE="${BUILD_TYPE}" "${PACKAGE_VERSION_SUFFIX}"  "${COVERAGE_FLAGS}" "${CMAKE_OPTIONS[@]}"
+    cd "${BUILD_DIR}"
+    cmake --build .
     cpack -G DEB
 fi
+
