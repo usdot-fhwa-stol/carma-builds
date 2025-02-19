@@ -60,7 +60,7 @@ elif [[ ${GITHUB_REF_NAME} =~ release/.* ]]; then
 
 # check for release tags, do not use develop for these
 elif [[ $GITHUB_REF_TYPE = tag ]]; then
-    APT_CODENAME=release-${NO_UNDERSCORE_NAME##*/}
+    APT_CODENAME=main
     USE_DEVELOP=0
 
 # default to pull from for all repos
@@ -70,16 +70,18 @@ fi
 
 STOL_APT_AWS_BUCKET_NAME=stol-apt-repository
 STOL_APT_REPOSITORY=http://s3.amazonaws.com/${STOL_APT_AWS_BUCKET_NAME}
+# Get ubuntu distribution code name. All STOL APT debian packages are pushed to S3 bucket based on distribution codename.
+. /etc/lsb-release
 
 LIST_FILE=/etc/apt/sources.list.d/carma.list
 PREFERENCE_FILE=/etc/apt/preferences.d/carma.pref
 rm -f $LIST_FILE
 rm -f $PREFERENCE_FILE
 if [ $USE_DEVELOP -eq 1 ]; then
-    echo "deb [trusted=yes] ${STOL_APT_REPOSITORY} develop main" >> $LIST_FILE
+    echo "deb [trusted=yes] ${STOL_APT_REPOSITORY} develop ${DISTRIB_CODENAME}" >> $LIST_FILE
 fi
 if [[ -n "$APT_CODENAME" && "$APT_CODENAME" != "develop" ]]; then
-    echo "deb [trusted=yes] ${STOL_APT_REPOSITORY} ${APT_CODENAME} main" >> $LIST_FILE
+    echo "deb [trusted=yes] ${STOL_APT_REPOSITORY} ${APT_CODENAME} ${DISTRIB_CODENAME}" >> $LIST_FILE
     # if using develop as a secondary repo then pin this one
     if [ $USE_DEVELOP -eq 1 ]; then
     # pin this repository
