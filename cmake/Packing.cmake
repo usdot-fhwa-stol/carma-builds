@@ -89,7 +89,7 @@ string(STRIP "${UBUNTU_CODENAME}" UBUNTU_CODENAME)
 string(REPLACE "Codename:" "" UBUNTU_CODENAME "${UBUNTU_CODENAME}")
 # Strip again to ensure there are no leading/trailing spaces after removal
 string(STRIP "${UBUNTU_CODENAME}" UBUNTU_CODENAME)
-message(STATUS "Ubuntu Codename:${UBUNTU_CODENAME)")
+message(STATUS "Ubuntu Codename:${UBUNTU_CODENAME}")
 # get architecture
 find_program(DPKG_CMD dpkg)
 if(NOT DPKG_CMD)
