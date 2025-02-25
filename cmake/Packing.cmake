@@ -17,7 +17,7 @@ execute_process(
     OUTPUT_VARIABLE UBUNTU_CODENAME
     OUTPUT_STRIP_TRAILING_WHITESPACE
 )
-
+string(STRIP "${UBUNTU_CODENAME}" UBUNTU_CODENAME)
 # Set the SO_VERSION variable to the Ubuntu codename
 message(STATUS "Ubuntu codename: ${UBUNTU_CODENAME}")
 
