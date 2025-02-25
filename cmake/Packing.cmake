@@ -18,6 +18,9 @@ execute_process(
     OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 string(STRIP "${UBUNTU_CODENAME}" UBUNTU_CODENAME)
+string(REPLACE "Codename:" "" UBUNTU_CODENAME "${UBUNTU_CODENAME}")
+# Strip again to ensure there are no leading/trailing spaces after removal
+string(STRIP "${UBUNTU_CODENAME}" UBUNTU_CODENAME)
 # Set the SO_VERSION variable to the Ubuntu codename
 message(STATUS "Ubuntu codename:${UBUNTU_CODENAME}")
 
