@@ -11,6 +11,17 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebIn
 else()
     set (CPACK_STRIP_FILES)
 endif()
+# set SO version to ubuntu codename
+execute_process(
+    COMMAND lsb_release -c
+    OUTPUT_VARIABLE UBUNTU_CODENAME
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+# Set the SO_VERSION variable to the Ubuntu codename
+set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION ${UBUNTU_CODENAME})
+# Print the value of SO_VERSION (optional)
+message(STATUS "Ubuntu codename: ${SO_VERSION}")
 # check the SO version
 get_target_property(target_type ${PROJECT_NAME} TYPE)
 if (target_type STREQUAL "SHARED_LIBRARY")
