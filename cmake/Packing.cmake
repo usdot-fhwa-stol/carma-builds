@@ -59,7 +59,7 @@ set(CPACK_PACKAGE_CONTACT "CARMAsupport@dot.gov")
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "FHWA Saxton Laboratory <${CPACK_PACKAGE_CONTACT}>")
 
 # license file not currently used in Debian packaging
-set(CPACK_RESOURCE_FILE_LICENSE "$ENV{CARMA_OPT_DIR}/LICENSE")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
 set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
 
 # package name for deb. If set, then instead of some-application-0.9.2-Linux.deb
