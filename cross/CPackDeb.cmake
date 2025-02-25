@@ -705,11 +705,20 @@ function(cpack_deb_prepare_package_vars)
   if(CPACK_DEBIAN_FILE_NAME)
     if(CPACK_DEBIAN_FILE_NAME STREQUAL "DEB-DEFAULT")
       # Patch package file name to be in correct debian format:
-      # <foo>_<VersionNumber>-<DebianRevisionNumber>_<DebianArchitecture>.deb
+      # <foo>_<VersionNumber>-<DebianRevisionNumber>_<UbuntuDistro>_<DebianArchitecture>.deb
+      execute_process(
+          COMMAND lsb_release -c
+          OUTPUT_VARIABLE UBUNTU_CODENAME
+          OUTPUT_STRIP_TRAILING_WHITESPACE
+      )
+      string(STRIP "${UBUNTU_CODENAME}" UBUNTU_CODENAME)
+      string(REPLACE "Codename:" "" UBUNTU_CODENAME "${UBUNTU_CODENAME}")
+      # Strip again to ensure there are no leading/trailing spaces after removal
+      string(STRIP "${UBUNTU_CODENAME}" UBUNTU_CODENAME)
       set(CPACK_OUTPUT_FILE_NAME
-        "${CPACK_DEBIAN_PACKAGE_NAME}_${CPACK_DEBIAN_PACKAGE_VERSION}_${CPACK_DEBIAN_PACKAGE_ARCHITECTURE}.deb")
+        "${CPACK_DEBIAN_PACKAGE_NAME}_${CPACK_DEBIAN_PACKAGE_VERSION}_${UBUNTU_CODENAME}_${CPACK_DEBIAN_PACKAGE_ARCHITECTURE}.deb")
       set(CPACK_DBGSYM_OUTPUT_FILE_NAME
-        "${CPACK_DEBIAN_PACKAGE_NAME}-dbgsym_${CPACK_DEBIAN_PACKAGE_VERSION}_${CPACK_DEBIAN_PACKAGE_ARCHITECTURE}.ddeb")
+        "${CPACK_DEBIAN_PACKAGE_NAME}-dbgsym_${CPACK_DEBIAN_PACKAGE_VERSION}_${UBUNTU_CODENAME}_${CPACK_DEBIAN_PACKAGE_ARCHITECTURE}.ddeb")
     else()
       if(NOT CPACK_DEBIAN_FILE_NAME MATCHES ".*\\.(deb|ipk)")
         message(FATAL_ERROR "'${CPACK_DEBIAN_FILE_NAME}' is not a valid DEB package file name as it must end with '.deb' or '.ipk'!")
