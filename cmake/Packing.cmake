@@ -19,9 +19,12 @@ execute_process(
 )
 
 # Set the SO_VERSION variable to the Ubuntu codename
-set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION ${UBUNTU_CODENAME})
+message(STATUS "Ubuntu codename: ${UBUNTU_CODENAME}")
+
+set_target_properties(${PROJECT_NAME} PROPERTIES 
+    SOVERSION ${UBUNTU_CODENAME}
+)
 # Print the value of SO_VERSION (optional)
-message(STATUS "Ubuntu codename: ${SO_VERSION}")
 # check the SO version
 get_target_property(target_type ${PROJECT_NAME} TYPE)
 if (target_type STREQUAL "SHARED_LIBRARY")
