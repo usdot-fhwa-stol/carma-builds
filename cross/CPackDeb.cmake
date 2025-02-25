@@ -715,6 +715,7 @@ function(cpack_deb_prepare_package_vars)
       string(REPLACE "Codename:" "" UBUNTU_CODENAME "${UBUNTU_CODENAME}")
       # Strip again to ensure there are no leading/trailing spaces after removal
       string(STRIP "${UBUNTU_CODENAME}" UBUNTU_CODENAME)
+      message(STATUS "Ubuntu Codename:${UBUNTU_CODENAME)")
       set(CPACK_OUTPUT_FILE_NAME
         "${CPACK_DEBIAN_PACKAGE_NAME}_${CPACK_DEBIAN_PACKAGE_VERSION}_${UBUNTU_CODENAME}_${CPACK_DEBIAN_PACKAGE_ARCHITECTURE}.deb")
       set(CPACK_DBGSYM_OUTPUT_FILE_NAME
