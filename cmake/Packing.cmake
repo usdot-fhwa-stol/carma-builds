@@ -103,5 +103,5 @@ execute_process(COMMAND "${DPKG_CMD}" --print-architecture
 # package name for deb. If set, then instead of some-application-0.9.2-Linux.deb
 # you'll get some-application_0.9.2_jammy_amd64.deb (note the underscores too). This name 
 # prevents overwriting and the DEB_DEFAULT without ubuntu distro does not
-set(CPACK_DEBIAN_FILE_NAME "${CPACK_PACKAGE_NAME}_${CPACK_PACKAGE_VERSION}_${UBUNTU_CODENAME}_${CPACK_DEBIAN_PACKAGE_ARCHITECTURE}")
+set(CPACK_DEBIAN_FILE_NAME "${CPACK_PACKAGE_NAME}_${CPACK_PACKAGE_VERSION}_${UBUNTU_CODENAME}_${CPACK_DEBIAN_PACKAGE_ARCHITECTURE}.deb")
 include(CPack)
