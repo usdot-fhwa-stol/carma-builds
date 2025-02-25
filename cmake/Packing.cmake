@@ -19,7 +19,7 @@ execute_process(
 )
 string(STRIP "${UBUNTU_CODENAME}" UBUNTU_CODENAME)
 # Set the SO_VERSION variable to the Ubuntu codename
-message(STATUS "Ubuntu codename: ${UBUNTU_CODENAME}")
+message(STATUS "Ubuntu codename:${UBUNTU_CODENAME}")
 
 set_target_properties(${PROJECT_NAME} PROPERTIES 
     SOVERSION ${UBUNTU_CODENAME}
@@ -29,6 +29,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 get_target_property(target_type ${PROJECT_NAME} TYPE)
 if (target_type STREQUAL "SHARED_LIBRARY")
     get_target_property(so_version ${PROJECT_NAME} SOVERSION)
+    message(STATUS "SOVERSION:${so_version}")
     # Check if so_version is empty or not found to allow for version 0
     # which is normally treated the same as so_version-NOTFOUND in a condition.
     if ("${so_version}" STREQUAL "" OR "${so_version}" STREQUAL "so_version-NOTFOUND")
