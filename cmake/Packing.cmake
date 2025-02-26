@@ -79,6 +79,10 @@ if (DEFINED ENV{BUILD_ARCHITECTURE})
     set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE $ENV{BUILD_ARCHITECTURE})
     set(CPACK_OBJCOPY_EXECUTABLE ${CMAKE_OBJCOPY})
 endif()
+# NOTE: Steps below this are to retrieve architecture and ubuntu codename
+# to set naming convention for deb file to <package-name>-<so-version>_<package-version>_<ubuntu-codename>_<package-architecture>.deb.
+# This is different from default naming convention in that it includes ubuntu code name
+# which prevents naming conflict and overwriting for packages built in different ubuntu distros
 # get ubuntu distro
 execute_process(
       COMMAND lsb_release -c
