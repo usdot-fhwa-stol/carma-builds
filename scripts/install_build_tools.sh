@@ -8,7 +8,8 @@ DEPENDENCIES=(
         build-essential
         gdb
         git
-        file)
+        file
+        lsb-release)
 DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends --yes --quiet "${DEPENDENCIES[@]}"
 cd /tmp
 # Installing CMake 

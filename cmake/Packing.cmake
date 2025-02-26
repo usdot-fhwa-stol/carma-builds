@@ -11,6 +11,7 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebIn
 else()
     set (CPACK_STRIP_FILES)
 endif()
+
 # check the SO version
 get_target_property(target_type ${PROJECT_NAME} TYPE)
 if (target_type STREQUAL "SHARED_LIBRARY")
@@ -56,13 +57,10 @@ endif()
 set(CPACK_PACKAGE_CONTACT "CARMAsupport@dot.gov")
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "FHWA Saxton Laboratory <${CPACK_PACKAGE_CONTACT}>")
 
-# license file not currently used in Debian packaging
-#set(CPACK_RESOURCE_FILE_LICENSE "$ENV{CARMA_OPT_DIR}/LICENSE")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
 set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
 
-# package name for deb. If set, then instead of some-application-0.9.2-Linux.deb
-# you'll get some-application_0.9.2_amd64.deb (note the underscores too)
-set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT)
+
 # that is if you want every group to have its own package,
 # although the same will happen if this is not set (so it defaults to ONE_PER_GROUP)
 # and CPACK_DEB_COMPONENT_INSTALL is set to YES
@@ -80,5 +78,33 @@ if (DEFINED ENV{BUILD_ARCHITECTURE})
     set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE $ENV{BUILD_ARCHITECTURE})
     set(CPACK_OBJCOPY_EXECUTABLE ${CMAKE_OBJCOPY})
 endif()
-
+# NOTE: Steps below this are to retrieve architecture and ubuntu codename
+# to set naming convention for deb file to <package-name>-<so-version>_<package-version>_<ubuntu-codename>_<package-architecture>.deb.
+# This is different from default naming convention in that it includes ubuntu code name
+# which prevents naming conflict and overwriting for packages built in different ubuntu distros
+# get ubuntu distro
+execute_process(
+      COMMAND lsb_release -c
+      OUTPUT_VARIABLE UBUNTU_CODENAME
+      OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+string(STRIP "${UBUNTU_CODENAME}" UBUNTU_CODENAME)
+string(REPLACE "Codename:" "" UBUNTU_CODENAME "${UBUNTU_CODENAME}")
+# Strip again to ensure there are no leading/trailing spaces after removal
+string(STRIP "${UBUNTU_CODENAME}" UBUNTU_CODENAME)
+message(STATUS "Ubuntu Codename:${UBUNTU_CODENAME}")
+# get architecture
+find_program(DPKG_CMD dpkg)
+if(NOT DPKG_CMD)
+  message(STATUS "CPackDeb: Can not find dpkg in your path, default to i386.")
+  set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE i386)
+endif()
+execute_process(COMMAND "${DPKG_CMD}" --print-architecture
+  OUTPUT_VARIABLE CPACK_DEBIAN_PACKAGE_ARCHITECTURE
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+# package name for deb. If set, then instead of some-application-0.9.2-Linux.deb
+# you'll get some-application_0.9.2_jammy_amd64.deb (note the underscores too). This name 
+# prevents overwriting and the DEB_DEFAULT without ubuntu distro does not
+set(CPACK_DEBIAN_FILE_NAME "${CPACK_PACKAGE_NAME}_${CPACK_PACKAGE_VERSION}_${UBUNTU_CODENAME}_${CPACK_DEBIAN_PACKAGE_ARCHITECTURE}.deb")
 include(CPack)
