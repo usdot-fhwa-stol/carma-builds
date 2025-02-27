@@ -93,7 +93,10 @@ string(REPLACE "Codename:" "" UBUNTU_CODENAME "${UBUNTU_CODENAME}")
 # Strip again to ensure there are no leading/trailing spaces after removal
 string(STRIP "${UBUNTU_CODENAME}" UBUNTU_CODENAME)
 message(STATUS "Ubuntu Codename:${UBUNTU_CODENAME}")
-if (NOT CPACK_DEBIAN_PACKAGE_ARCHITECTURE)
+# Get Archictecture taken from CPackDeb.cmake
+if(CPACK_DEB_PACKAGE_COMPONENT AND CPACK_DEBIAN_${_local_component_name}_PACKAGE_ARCHITECTURE)
+    set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "${CPACK_DEBIAN_${_local_component_name}_PACKAGE_ARCHITECTURE}")
+elseif(NOT CPACK_DEBIAN_PACKAGE_ARCHITECTURE)
     # get architecture
     find_program(DPKG_CMD dpkg)
     if(NOT DPKG_CMD)
