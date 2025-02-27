@@ -93,16 +93,21 @@ string(REPLACE "Codename:" "" UBUNTU_CODENAME "${UBUNTU_CODENAME}")
 # Strip again to ensure there are no leading/trailing spaces after removal
 string(STRIP "${UBUNTU_CODENAME}" UBUNTU_CODENAME)
 message(STATUS "Ubuntu Codename:${UBUNTU_CODENAME}")
-# get architecture
-find_program(DPKG_CMD dpkg)
-if(NOT DPKG_CMD)
-  message(STATUS "CPackDeb: Can not find dpkg in your path, default to i386.")
-  set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE i386)
+# Get Archictecture taken from CPackDeb.cmake
+if(CPACK_DEB_PACKAGE_COMPONENT AND CPACK_DEBIAN_${_local_component_name}_PACKAGE_ARCHITECTURE)
+    set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "${CPACK_DEBIAN_${_local_component_name}_PACKAGE_ARCHITECTURE}")
+elseif(NOT CPACK_DEBIAN_PACKAGE_ARCHITECTURE)
+    # get architecture
+    find_program(DPKG_CMD dpkg)
+    if(NOT DPKG_CMD)
+    message(STATUS "CPackDeb: Can not find dpkg in your path, default to i386.")
+    set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE i386)
+    endif()
+    execute_process(COMMAND "${DPKG_CMD}" --print-architecture
+    OUTPUT_VARIABLE CPACK_DEBIAN_PACKAGE_ARCHITECTURE
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
 endif()
-execute_process(COMMAND "${DPKG_CMD}" --print-architecture
-  OUTPUT_VARIABLE CPACK_DEBIAN_PACKAGE_ARCHITECTURE
-  OUTPUT_STRIP_TRAILING_WHITESPACE
-  )
 # package name for deb. If set, then instead of some-application-0.9.2-Linux.deb
 # you'll get some-application_0.9.2_jammy_amd64.deb (note the underscores too). This name 
 # prevents overwriting and the DEB_DEFAULT without ubuntu distro does not
