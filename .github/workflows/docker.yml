@@ -5,7 +5,7 @@ on:
   push:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '10 10 * * 4'
+    - cron:  '11 10 * * 4'
 
 env:
   REGISTRY: ghcr.io
