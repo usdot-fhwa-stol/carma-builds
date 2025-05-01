@@ -3,6 +3,9 @@ name: Docker Build
 on:
   pull_request:
   push:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '11 10 * * 4'
 
 env:
   REGISTRY: ghcr.io
