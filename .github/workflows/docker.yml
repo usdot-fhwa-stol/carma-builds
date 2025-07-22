@@ -17,9 +17,6 @@ jobs:
       matrix:
         include:
           - architecture: x64
-            ubuntu-codename: bionic
-            target: x64-version
-          - architecture: x64
             ubuntu-codename: focal
             target: x64-version
           - architecture: armhf
@@ -36,6 +33,15 @@ jobs:
             target: cross-compile-version
           - architecture: arm64
             ubuntu-codename: jammy
+            target: cross-compile-version
+          - architecture: x64
+            ubuntu-codename: noble
+            target: x64-version
+          - architecture: armhf
+            ubuntu-codename: noble
+            target: cross-compile-version
+          - architecture: arm64
+            ubuntu-codename: noble
             target: cross-compile-version
     runs-on: ubuntu-latest
     steps:
