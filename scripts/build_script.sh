@@ -24,7 +24,7 @@ GENERATE_COVERAGE=0
 GENERATE_DEBIAN_PACKAGE=0
 
 # Get the options
-while getopts "cdhpsD:" option; do
+while getopts "cdhps:D:" option; do
     case $option in
         c) # generate coverage report
             GENERATE_COVERAGE=1
