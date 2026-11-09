@@ -44,6 +44,15 @@ jobs:
           - architecture: arm64
             ubuntu-codename: noble
             target: cross-compile-version
+          - architecture: x64
+            ubuntu-codename: resolute
+            target: x64-version
+          - architecture: armhf
+            ubuntu-codename: resolute
+            target: cross-compile-version
+          - architecture: arm64
+            ubuntu-codename: resolute
+            target: cross-compile-version
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
